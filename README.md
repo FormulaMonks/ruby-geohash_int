@@ -41,7 +41,7 @@ result = GeohashInt.decode(value, precision)
 result.latitude  # => 12.392578125
 result.longitude # => 56.77734375
 
-# Geohash actually encodes to a value to a bounding box:
+# Geohash actually encodes a value to a bounding box:
 # the above latitude and longitude are just its center.
 result.min_latitude   # => 12.3046875
 result.max_latitude   # => 12.48046875
