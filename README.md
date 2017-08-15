@@ -4,6 +4,9 @@ Wraps [geohash-int](https://github.com/yinqiwen/geohash-int)
 (A fast C99 geohash library which only provides int64 as hash result) for Ruby
 using [ffi](https://github.com/ffi/ffi) (this means this can be used by JRuby).
 
+This can be used to build an efficient spatial data index, as explained
+[here](https://github.com/yinqiwen/ardb/wiki/Spatial-Index).
+
 ## Installation
 
 Add this line to your application's Gemfile:
