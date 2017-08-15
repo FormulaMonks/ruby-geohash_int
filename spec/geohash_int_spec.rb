@@ -89,7 +89,6 @@ RSpec.describe GeohashInt do
   describe "get_neighbors" do
     it "gets neighbors" do
       result = GeohashInt.get_neighbors(825366, 10)
-      p result
       expect(result.north).to       eq(825367)
       expect(result.east).to        eq(825372)
       expect(result.west).to        eq(825364)
