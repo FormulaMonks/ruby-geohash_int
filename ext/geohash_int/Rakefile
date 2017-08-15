@@ -1,0 +1,33 @@
+require "rbconfig"
+require "ffi"
+
+task :default => [:build, :clean]
+
+def cmd(string)
+  fail "Command failed: #{string}" unless system(string)
+end
+
+task :build do
+  lib_name = "geohash.#{FFI::Platform::LIBSUFFIX}"
+
+  cc      = ENV['CC'] || RbConfig::CONFIG['CC'] || 'cc'
+  cflags  = "-fexceptions -O -fno-omit-frame-pointer -fno-strict-aliasing -Wall -Wextra"
+  ldflags = "-fexceptions"
+
+  if FFI::Platform.mac?
+    ldflags << " -bundle"
+  elsif FFI::Platform.name =~ /linux/
+    cflags  << " -fPIC"
+    ldflags << " -shared -Wl,-soname,#{lib_name}"
+  else
+    cflags  << " -fPIC"
+    ldflags << " -shared"
+  end
+
+  cmd "#{cc} #{cflags} -o geohash.o -c geohash.c"
+  cmd "#{cc} #{ldflags} -o #{lib_name} geohash.o"
+end
+
+task :clean do
+  cmd "rm geohash.o"
+end
