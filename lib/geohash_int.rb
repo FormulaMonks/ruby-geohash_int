@@ -57,7 +57,7 @@ module GeohashInt
 
     result = GeohashInt::FFI.geohash_encode(LAT_RANGE, LNG_RANGE,
                                             latitude, longitude,
-                                            precision, bits.pointer)
+                                            precision, bits)
     if result == 0
       bits[:bits]
     else
@@ -79,7 +79,7 @@ module GeohashInt
     # This will always return 0 because the only condition for it
     # returning something else is when area is NULL, but we are
     # not passing NULL.
-    GeohashInt::FFI.geohash_decode(LAT_RANGE, LNG_RANGE, bits, area.pointer)
+    GeohashInt::FFI.geohash_decode(LAT_RANGE, LNG_RANGE, bits, area)
 
     lat_range = area[:latitude]
     lng_range = area[:longitude]
@@ -102,7 +102,7 @@ module GeohashInt
     bits     = new_bits(value, precision)
     neighbor = GeohashInt::FFI::Bits.new
 
-    result = GeohashInt::FFI.geohash_get_neighbor(bits, direction, neighbor.pointer)
+    result = GeohashInt::FFI.geohash_get_neighbor(bits, direction, neighbor)
     if result == 0
       neighbor[:bits]
     else
@@ -120,7 +120,7 @@ module GeohashInt
     neighbors = GeohashInt::FFI::Neighbors.new
 
     # This function never fails
-    GeohashInt::FFI.geohash_get_neighbors(bits, neighbors.pointer)
+    GeohashInt::FFI.geohash_get_neighbors(bits, neighbors)
 
     Neighbors.new(
       neighbors[:north     ][:bits],

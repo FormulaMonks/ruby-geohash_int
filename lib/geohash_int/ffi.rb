@@ -33,10 +33,10 @@ module GeohashInt
              :south_west, Bits
     end
 
-    attach_function :geohash_encode, [Range.val, Range.val, :double, :double, :uint8, :pointer], :int
-    attach_function :geohash_decode, [Range.val, Range.val, Bits.val, :pointer], :int
+    attach_function :geohash_encode, [Range.val, Range.val, :double, :double, :uint8, Bits.ptr], :int
+    attach_function :geohash_decode, [Range.val, Range.val, Bits.val, Area.ptr], :int
 
-    attach_function :geohash_get_neighbors, [Bits.val, :pointer], :int
-    attach_function :geohash_get_neighbor, [Bits.val, :int, :pointer], :int
+    attach_function :geohash_get_neighbors, [Bits.val, Neighbors.ptr], :int
+    attach_function :geohash_get_neighbor, [Bits.val, :int, Bits.ptr], :int
   end
 end
