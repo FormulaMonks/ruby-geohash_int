@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Wraps geohash-int (https://github.com/yinqiwen/geohash-int, " \
                        "a fast C99 geohash library which only provides int64 as hash " \
                        "result) for Ruby using ffi"
-  spec.homepage      = "https://github.com/asterite/geohash_int"
+  spec.homepage      = "https://github.com/citrusbyte/ruby-geohash_int"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
