@@ -55,9 +55,9 @@ module GeohashInt
   def encode(latitude, longitude, precision)
     bits = GeohashInt::FFI::Bits.new
 
-    result = GeohashInt::FFI.geohash_encode(LAT_RANGE, LNG_RANGE,
-                                            latitude, longitude,
-                                            precision, bits)
+    result = GeohashInt::FFI.geohash_fast_encode(LAT_RANGE, LNG_RANGE,
+                                                 latitude, longitude,
+                                                 precision, bits)
     if result == 0
       bits[:bits]
     else
@@ -79,7 +79,7 @@ module GeohashInt
     # This will always return 0 because the only condition for it
     # returning something else is when area is NULL, but we are
     # not passing NULL.
-    GeohashInt::FFI.geohash_decode(LAT_RANGE, LNG_RANGE, bits, area)
+    GeohashInt::FFI.geohash_fast_decode(LAT_RANGE, LNG_RANGE, bits, area)
 
     lat_range = area[:latitude]
     lng_range = area[:longitude]

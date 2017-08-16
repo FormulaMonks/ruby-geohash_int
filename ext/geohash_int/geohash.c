@@ -222,8 +222,8 @@ int geohash_fast_encode(
     double lon_offset = (longitude - lon_range.min) / (lon_range.max - lon_range.min);
 
     //convert it to fixed point based on the step size
-    lat_offset *= (1 << step);
-    lon_offset *= (1 << step);
+    lat_offset *= (1LL << step);
+    lon_offset *= (1LL << step);
 
     uint32_t ilato = (uint32_t) lat_offset;
     uint32_t ilono = (uint32_t) lon_offset;
