@@ -48,32 +48,35 @@ module GeohashInt
     :south_west, :south_east, :north_west, :north_east,
   ); end
 
-  # Encodes a coordinate with a given precision (1..32).
+  # Encodes a coordinate by splitting the world map the given number of steps (1..32).
   #
   # Returns the encoded value as an integer (Fixnum). To correctly decode this
-  # value back into a coordinate you must pass the same precision to #decode.
-  def encode(latitude, longitude, precision)
+  # value back into a coordinate you must pass the same steps to #decode.
+  #
+  # To learn more about the *steps* argument, read this explanation in the Readme
+  # file: https://github.com/citrusbyte/ruby-geohash_int/blob/master/README.md#explanation
+  def encode(latitude, longitude, steps)
     bits = GeohashInt::FFI::Bits.new
 
     result = GeohashInt::FFI.geohash_fast_encode(LAT_RANGE, LNG_RANGE,
                                                  latitude, longitude,
-                                                 precision, bits)
+                                                 steps, bits)
     if result == 0
       bits[:bits]
     else
       raise ArgumentError.new("Incorrect value for latitude (#{latitude}), " \
-                              "longitude (#{longitude}) or precision (#{precision})")
+                              "longitude (#{longitude}) or steps (#{steps})")
     end
   end
 
-  # Decodes a previously encoded value. The given precision must be the same
+  # Decodes a previously encoded value. The given *steps* must be the same
   # as the one given in #encode to generate *value*.
   #
   # Returns a BoundingBox where the original  coordinate falls
   # (the Geohash algorithm is lossy), where `latitude` and `longitude` of that
   # bounding box are its center.
-  def decode(value, precision)
-    bits = new_bits(value, precision)
+  def decode(value, steps)
+    bits = new_bits(value, steps)
     area = GeohashInt::FFI::Area.new
 
     # This will always return 0 because the only condition for it
@@ -97,9 +100,9 @@ module GeohashInt
   # Gets a neighbor of an encoded value.
   #
   # - *direction* must be one of this module's constants ( NORTH, EAST, etc. ).
-  # - *precision* must be the same as the one used in #encode to generate *value*.
-  def get_neighbor(value, direction, precision)
-    bits     = new_bits(value, precision)
+  # - *steps* must be the same as the one used in #encode to generate *value*.
+  def get_neighbor(value, direction, steps)
+    bits     = new_bits(value, steps)
     neighbor = GeohashInt::FFI::Bits.new
 
     result = GeohashInt::FFI.geohash_get_neighbor(bits, direction, neighbor)
@@ -112,11 +115,11 @@ module GeohashInt
 
   # Gets all neighbors of an encoded value.
   #
-  # - *precision* must be the same as the one used in `encode` to generate *value*.
+  # - *steps* must be the same as the one used in `encode` to generate *value*.
   #
   # Returns a Neighbors instance.
-  def get_neighbors(value, precision)
-    bits      = new_bits(value, precision)
+  def get_neighbors(value, steps)
+    bits      = new_bits(value, steps)
     neighbors = GeohashInt::FFI::Neighbors.new
 
     # This function never fails
@@ -134,10 +137,10 @@ module GeohashInt
     )
   end
 
-  private def new_bits(value, precision)
+  private def new_bits(value, steps)
     GeohashInt::FFI::Bits.new.tap do |bits|
       bits[:bits] = value
-      bits[:step] = precision
+      bits[:step] = steps
     end
   end
 end
