@@ -6,12 +6,12 @@ RSpec.describe GeohashInt do
   end
 
   describe "encode" do
-    it "with precision 10" do
+    it "with steps is 10" do
       encoded = GeohashInt.encode(12.34, 56.78, 10)
       expect(encoded).to eq(825366)
     end
 
-    it "with precision 32" do
+    it "with steps is 32" do
       encoded = GeohashInt.encode(12.34, 56.78, 32)
       expect(encoded).to eq(14520001368503071193)
     end
@@ -28,13 +28,13 @@ RSpec.describe GeohashInt do
       }.to raise_error(ArgumentError)
     end
 
-    it "raises when precision out of bounds" do
+    it "raises when steps are out of bounds" do
       expect {
         GeohashInt.encode(12.34, 180.1, 33)
       }.to raise_error(ArgumentError)
     end
 
-    it "raises when precision is zero" do
+    it "raises when steps is zero" do
       expect {
         GeohashInt.encode(12.34, 180.1, 0)
       }.to raise_error(ArgumentError)
@@ -47,7 +47,7 @@ RSpec.describe GeohashInt do
   end
 
   describe "decode" do
-    it "with precision 10" do
+    it "with steps is 10" do
       result = GeohashInt.decode(825366, 10)
       expect(result.latitude).to      eq(12.392578125)
       expect(result.longitude).to     eq(56.77734375)
@@ -57,7 +57,7 @@ RSpec.describe GeohashInt do
       expect(result.max_longitude).to eq(56.953125)
     end
 
-    it "with precision 32" do
+    it "with steps is 32" do
       result = GeohashInt.decode(14520001368503071193, 32)
       expect(result.latitude).to      eq(12.340000018011779)
       expect(result.longitude).to     eq(56.78000001702458)
