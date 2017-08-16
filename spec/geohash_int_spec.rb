@@ -47,7 +47,7 @@ RSpec.describe GeohashInt do
   end
 
   describe "decode" do
-    it "with default precision 10" do
+    it "with precision 10" do
       result = GeohashInt.decode(825366, 10)
       expect(result.latitude).to      eq(12.392578125)
       expect(result.longitude).to     eq(56.77734375)
