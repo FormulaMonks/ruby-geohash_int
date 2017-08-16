@@ -10,7 +10,7 @@ This can be used to build an efficient spatial data index, as explained
 
 ## Explanation
 
-This library turns a cooridnate (a latitude and a longitude) into a 64 bits
+This library turns a coordinate (a latitude and a longitude) into a 64 bits
 integer. To understand what this integer means we need to learn how the Geohash
 algorithm works. Don't worry, it's super simple.
 
