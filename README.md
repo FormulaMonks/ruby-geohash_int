@@ -2,7 +2,8 @@
 
 Wraps [geohash-int](https://github.com/yinqiwen/geohash-int)
 (A fast C99 geohash library which only provides int64 as hash result) for Ruby
-using [ffi](https://github.com/ffi/ffi) (this means this can be used by JRuby).
+using [FFI](https://github.com/ffi/ffi) (this means it is compatible with all
+implementations of Ruby that support FFI, including MRI, JRuby, and Rubinius).
 
 This can be used to build an efficient spatial data index, as explained
 [here](https://github.com/yinqiwen/ardb/wiki/Spatial-Index).
@@ -83,7 +84,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/asterite/geohash_int.
+Bug reports and pull requests are welcome on GitHub at https://github.com/citrusbyte/ruby-geohash_int.
 
 ## License
 
