@@ -70,13 +70,13 @@ require "geohash_int"
 
 latitude  = 12.34
 longitude = 56.78
-precision = 10
+steps     = 10
 
-value = GeohashInt.encode(latitude, longitude, precision)
+value = GeohashInt.encode(latitude, longitude, steps)
 
 value # => 825366
 
-result = GeohashInt.decode(value, precision)
+result = GeohashInt.decode(value, steps)
 
 # Geohash is lossy
 result.latitude  # => 12.392578125
@@ -97,15 +97,15 @@ require "geohash_int"
 
 latitude  = 12.34
 longitude = 56.78
-precision = 10
+steps     = 10
 
-value = GeohashInt.encode(latitude, longitude, precision)
+value = GeohashInt.encode(latitude, longitude, steps)
 
-neighbor = GeohashInt.get_neighbor(value, GeohashInt::NORTH, precision)
+neighbor = GeohashInt.get_neighbor(value, GeohashInt::NORTH, steps)
 
 neighbor # => 825367
 
-neighbors = GeohashInt.get_neighbors(value, precision)
+neighbors = GeohashInt.get_neighbors(value, steps)
 
 neighbors = # => #<struct GeohashInt::Neighbors
             #       north=825367, east=825372, west=825364, south=825363,
