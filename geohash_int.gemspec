@@ -6,14 +6,14 @@ require "geohash_int/version"
 Gem::Specification.new do |spec|
   spec.name          = "geohash_int"
   spec.version       = GeohashInt::VERSION
-  spec.authors       = ["Ary Borenszweig"]
-  spec.email         = ["asterite@gmail.com"]
+  spec.authors       = ["Ary Borenszweig", "Joe Eli McIlvain"]
+  spec.email         = ["joe.mcilvain@theoremone.co"]
 
   spec.summary       = "Fast Geohash for Ruby that yields integers instead of strings"
   spec.description   = "Wraps geohash-int (https://github.com/yinqiwen/geohash-int, " \
                        "a fast C99 geohash library which only provides int64 as hash " \
                        "result) for Ruby using ffi"
-  spec.homepage      = "https://github.com/citrusbyte/ruby-geohash_int"
+  spec.homepage      = "https://github.com/TheoremOne/ruby-geohash_int"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

@@ -54,7 +54,7 @@ module GeohashInt
   # value back into a coordinate you must pass the same steps to #decode.
   #
   # To learn more about the *steps* argument, read this explanation in the Readme
-  # file: https://github.com/citrusbyte/ruby-geohash_int/blob/master/README.md#explanation
+  # file: https://github.com/TheoremOne/ruby-geohash_int/blob/master/README.md#explanation
   def encode(latitude, longitude, steps)
     bits = GeohashInt::FFI::Bits.new
 
